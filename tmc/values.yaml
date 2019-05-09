@@ -10,6 +10,7 @@ replicaCount: 1
 namespace: tmc
 imagePullSecrets:
   name: regcred
+#image details
 image:
   repository: store/softwareag/tmc
   tag: 10.3

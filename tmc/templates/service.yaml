@@ -1,19 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "tmc.fullname" . }}
+  name: {{ template "tmc.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "tmc.name" . }}
-    helm.sh/chart: {{ include "tmc.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ template "tmc.name" . }}
+    chart: {{ template "tmc.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.service.type }}
+  {{- if .Values.service.ClusterIP }}
+  clusterIP: {{ .Values.service.ClusterIP }}
+  {{- end }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - name: tmc-port
+    port: {{ .Values.service.port }}
+    {{- if .Values.service.nodePort }}
+    type: nodePort
+    targetPort: {{ .Values.service.port }}
+    protocol: TCP
+    {{- end }}
   selector:
-    app.kubernetes.io/name: {{ include "tmc.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ template "tmc.name" . }}
+    release: {{ .Release.Name }}
