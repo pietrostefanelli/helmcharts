@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "terracottamc.fullname" . }}
+  name: {{ template "tmc.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app.kubernetes.io/name: {{ include "terracottamc.name" . }}
-    helm.sh/chart: {{ include "terracottamc.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ template "tmc.name" . }}
+    chart: {{ template "tmc.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "terracottamc.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ template "tmc.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "terracottamc.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ template "tmc.name" . }}
+        release: {{ .Release.Name }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
