@@ -1,3 +1,15 @@
 apiVersion: v1
-entries: {}
-generated: 2019-05-09T12:45:01.410248+02:00
+entries:
+  tmc:
+  - apiVersion: v1
+    appVersion: "10.3"
+    created: 2019-05-09T12:47:16.330934+02:00
+    description: A Helm chart for terracotta management console
+    digest: 115b282e2efc84b6f769bb4df18d4838e3835d6282a059b1df97b08c9065b1cc
+    home: https://github.com/pietrostefanelli/helmcharts
+    icon: https://avatars2.githubusercontent.com/u/4680389?s=200&v=4
+    name: tmc
+    urls:
+    - https://github.com/pietrostefanelli/helmcharts/tmc-1.0.0.tgz
+    version: 1.0.0
+generated: 2019-05-09T12:47:16.326915+02:00
